@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h2>Welcome, {{ request.user.full_name }}</h2>
+<h3>Your Subscriptions</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Plan</th>
+            <th>Amount Paid</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for quote in quotes %}
+        <tr>
+            <td>{{ quote.plan }}</td>
+            <td>{{ quote.amount_paid }}</td>
+            <td>{{ quote.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<h3>Transaction History</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Transaction ID</th>
+            <th>Amount</th>
+            <th>Payment Gateway</th>
+            <th>Status</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for transaction in transactions %}
+        <tr>
+            <td>{{ transaction.transaction_id }}</td>
+            <td>{{ transaction.amount }}</td>
+            <td>{{ transaction.payment_gateway }}</td>
+            <td>{{ transaction.status }}</td>
+            <td>{{ transaction.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

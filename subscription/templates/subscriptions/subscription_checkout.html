@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Subscription Checkout</h2>
+<p>You have selected the {{ package.name }} plan</p>
+<p>Total: ${{ discounted_price }}</p>
+
+<!-- Payment Form -->
+<form id="payment-form">
+    <div id="card-element"></div>
+    <button id="submit">Pay</button>
+</form>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    var stripe = Stripe('{{ stripe_public_key }}');
+    var elements = stripe.elements();
+    var card = elements.create("card");
+    card.mount("#card-element");
+
+    var form = document.getElementById("payment-form");
+    form.addEventListener("submit", async function(event) {
+        event.preventDefault();
+        const {paymentIntent, error} = await stripe.confirmCardPayment(
+            "{{ client_secret }}", {
+            payment_method: {
+                card: card,
+                billing_details: {
+                    name: "{{ user.username }}"
+                }
+            }
+        });
+
+        if (error) {
+            alert(error.message);
+        } else {
+            alert("Payment successful! Subscription active.");
+            window.location.href = "/subscription/thank-you/";  // Redirect after success
+        }
+    });
+</script>
+{% endblock %}

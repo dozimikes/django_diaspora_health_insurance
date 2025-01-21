@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}Payment Cancelled{% endblock %}
+
+{% block content %}
+<h2>Payment Cancelled</h2>
+<p>Your payment was not completed. You can try again or choose a different plan.</p>
+<a href="{% url 'quick_quote' %}">Try Again</a>
+{% endblock %}

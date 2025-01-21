@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Subscription: {{ subscription_package.name }}</h1>
+    <p>{{ subscription_package.description }}</p>
+    <p>Monthly Price: ${{ subscription_package.monthly_price }}</p>
+    <p>Yearly Price: ${{ subscription_package.yearly_price }}</p>
+
+    <h3>Choose Your Subscription</h3>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Subscribe</button>
+    </form>
+{% endblock %}

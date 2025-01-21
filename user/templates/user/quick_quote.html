@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Quick Quote{% endblock %}
+
+{% block content %}
+<h2>Quick Quote</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}  <!-- This renders the form fields in a paragraph format -->
+    <button type="submit" class="btn btn-primary">Submit Quote</button>
+</form>
+
+{% endblock %}

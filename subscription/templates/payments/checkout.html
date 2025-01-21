@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Checkout</h1>
+    <p>Subscription Plan: {{ subscription.subscription_package.name }}</p>
+    <p>Amount: ${{ subscription.subscription_package.monthly_price }}</p>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Pay with Stripe</button>
+    </form>
+{% endblock %}

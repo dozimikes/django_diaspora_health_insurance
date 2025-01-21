@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Available Subscription Plans</h1>
+    <ul>
+        {% for package in subscription_packages %}
+            <li>
+                <h3>{{ package.name }}</h3>
+                <p>{{ package.description }}</p>
+                <p>Monthly Price: ${{ package.monthly_price }}</p>
+                <p>Yearly Price: ${{ package.yearly_price }}</p>
+                <a href="{% url 'subscription_detail' package.id %}">Choose this plan</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
