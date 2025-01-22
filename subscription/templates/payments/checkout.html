@@ -1,11 +1,21 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block content %}
-    <h1>Checkout</h1>
-    <p>Subscription Plan: {{ subscription.subscription_package.name }}</p>
-    <p>Amount: ${{ subscription.subscription_package.monthly_price }}</p>
-    <form method="POST">
-        {% csrf_token %}
-        <button type="submit">Pay with Stripe</button>
-    </form>
+<h1>Checkout</h1>
+<p>Package: {{ subscription.subscription_package.name }}</p>
+<p>Amount: ${{ subscription.subscription_package.price }}</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="radio" id="paystack" name="payment_method" value="paystack">
+    <label for="paystack">Paystack</label><br>
+    <input type="radio" id="stripe" name="payment_method" value="stripe">
+    <label for="stripe">Stripe</label><br>
+
+    <button type="submit">Proceed with Payment</button>
+</form>
+
+{% if error %}
+    <p style="color: red;">{{ error }}</p>
+{% endif %}
 {% endblock %}
